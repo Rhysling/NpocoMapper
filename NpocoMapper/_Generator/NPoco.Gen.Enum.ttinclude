@@ -1,0 +1,55 @@
+﻿<#+
+//
+void MakeEnum(Table tbl, string nameColumnName, string valueColumnName, string descriptionColumnName)
+{
+	List<EnumItem> itemList = LoadEnumItems(tbl.Name, nameColumnName, valueColumnName, descriptionColumnName);
+	int itemCount = itemList.Count();
+	int i;
+#>
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+using NPoco;
+using <#=Namespace #>.Core;
+
+namespace <#=Namespace #>
+{
+	public enum <#= tbl.EnumName #>
+	{
+<#+ for (i = 0; i < itemCount; i += 1) { #>
+		<#+ if (!String.IsNullOrEmpty(itemList[i].Description)) {#>[Description("<#= itemList[i].Description #>")]
+<#+ } #>
+		<#= itemList[i].Name #> = <#= itemList[i].Value + ((i < itemCount - 1) ? ",":"") #>
+<#+ } #>
+	}
+
+
+	public static partial class ApLists
+	{
+		public static List<NameValueItem> Get<#= tbl.EnumName #>List(string zeroItemText, string negOneItemText)
+		{
+			var lst = new List<NameValueItem>();
+			if (!String.IsNullOrWhiteSpace(negOneItemText)) lst.Add(new NameValueItem { Name = negOneItemText, Value = "-1" });
+			if (!String.IsNullOrWhiteSpace(zeroItemText)) lst.Add(new NameValueItem { Name = zeroItemText, Value = "0" });
+
+<#+ for (i = 0; i < itemCount; i += 1) { #>
+			lst.Add(new NameValueItem { Name = "<#= itemList[i].Name #>", Value = "<#= itemList[i].Value #>" });
+<#+ } #>
+
+			return lst;
+		}
+
+		public static List<SelectListItem> Get<#= tbl.ClassName #>SL(string zeroItemText, string negOneItemText)
+		{
+			return Get<#= tbl.EnumName #>List(zeroItemText, negOneItemText).Select(a => new System.Web.Mvc.SelectListItem { Value = a.Value, Text = a.Name }).ToList();
+		}
+	}
+}
+<#+
+	SaveOutput(GetEntityFullPath(tbl, EntityType.Enum));
+}
+#>

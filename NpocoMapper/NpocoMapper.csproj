@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Generated\**" />
+    <Compile Remove="_Generated\**" />
+    <Compile Remove="_Generator\**" />
+    <EmbeddedResource Remove="Generated\**" />
+    <EmbeddedResource Remove="_Generated\**" />
+    <EmbeddedResource Remove="_Generator\**" />
+    <None Remove="Generated\**" />
+    <None Remove="_Generated\**" />
+    <None Remove="_Generator\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="FileOps.cs" />
+    <Compile Remove="Ops\DbOps_bak.cs" />
+    <Compile Remove="FileUtils.cs" />
+    <Compile Remove="Models\Tables.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
+  </ItemGroup>
+
+</Project>

@@ -2,7 +2,7 @@
 using NPoco;
 using NpocoMapper.Demo.Services;
 
-namespace BotanicaStore.Repos.Core
+namespace NpocoMapper.Demo.Repos.Core
 {
 	public abstract class RepositoryBase : IDisposable
 	{

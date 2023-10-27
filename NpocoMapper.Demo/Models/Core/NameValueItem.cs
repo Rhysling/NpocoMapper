@@ -2,14 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using BotanicaStore.Services.FiltersAttributes;
 
-namespace BotanicaStore.Models.Core
+namespace NpocoMapper.Demo.Models
 {
 	[TypeScriptModel]
 	public class NameValueItem
 	{
-		public string Name { get; set; }
-		public string Value { get; set; }
+		public string Name { get; set; } = string.Empty;
+		public string Value { get; set; } = string.Empty;
 	}
 }

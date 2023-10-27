@@ -13,7 +13,7 @@ namespace NpocoMapper
 			//<#@ include file="NPoco.Core.ttinclude" #>
 
 			// Settings ********************************
-			string applicationName = "BotanicaStore";
+			string applicationName = "NpocoMapper.Demo";
 
 			//string dbName = applicationName + "Db";
 			string dbName = "TestingPocos";
@@ -38,6 +38,8 @@ namespace NpocoMapper
 
 			bool generateRepos = true;
 			bool overwriteRepos = true;
+
+			bool includeTsModelAttribute = true;
 
 
 			// Table name patterns to ignore:
@@ -82,7 +84,7 @@ namespace NpocoMapper
 				foreach (var p in pocos.Where(a => a.ClassType != "Enum"))
 				{
 					var et = p.ClassType == "Rw" ? EntityType.PocoRw : EntityType.PocoRo;
-					FileOps.SaveFile(modelPath, et, p.ClassName, Writer.WritePoco(p, modelNamespace), overwritePocos);
+					FileOps.SaveFile(modelPath, et, p.ClassName, Writer.WritePoco(p, modelNamespace, includeTsModelAttribute), overwritePocos);
 				}
 			}
 

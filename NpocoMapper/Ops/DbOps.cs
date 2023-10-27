@@ -47,7 +47,7 @@ namespace NpocoMapper.Ops
 		{
 			var vals = new List<EnumPocoProp>();
 
-			string sql = $@"
+			string sql = $"""
 				SELECT
 					[{enumPoco.IdColumnName}],
 					[{enumPoco.NameColumnName}],
@@ -55,7 +55,8 @@ namespace NpocoMapper.Ops
 				FROM
 					[{enumPoco.EntityName}]
 				ORDER BY
-					[{enumPoco.IdColumnName}];";
+					[{enumPoco.IdColumnName}];
+				""";
 
 			using (var conn = new SqlConnection(connString))
 			using (var cmd = new SqlCommand(sql, conn))

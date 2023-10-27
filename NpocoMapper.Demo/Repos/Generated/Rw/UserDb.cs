@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NPoco;
-using BotanicaStore.Models;
-using BotanicaStore.Repos.Core;
+using NpocoMapper.Demo.Models;
+using NpocoMapper.Demo.Repos.Core;
 
-namespace BotanicaStore.Repos;
+namespace NpocoMapper.Demo.Repos;
 
 public class UserDb : RepositoryBase
 {

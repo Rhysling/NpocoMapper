@@ -25,7 +25,7 @@ namespace NpocoMapper.Ops
 
 			return $@"using System;
 using System.Collections.Generic;
-using {namespaceName}.Core;
+using {namespaceName};
 
 namespace {namespaceName}
 {{
@@ -50,7 +50,7 @@ namespace {namespaceName}
 }}";
 		}
 
-		public static string WritePoco(Poco poco, string modelNamespace)
+		public static string WritePoco(Poco poco, string modelNamespace, bool includeTsModel)
 		{
 			string pk = "";
 			if (!String.IsNullOrWhiteSpace(poco.PrimaryKeys))
@@ -60,11 +60,13 @@ namespace {namespaceName}
 					""";
 			}
 
+			string tsm = includeTsModel ? "\r\n[TypeScriptModel]" : "";
+
 			var sb = new StringBuilder();
 			foreach (var p in poco.Props)
 			{
-				sb.AppendLine($"{t(2)}[NPoco.Column]");
-				sb.AppendLine($"{t(2)}public {p.PropType + (p.IsNullable ? "?" : "")} {p.PropName} {{ get; set; }}{((p.PropType == "string" && !p.IsNullable) ? " = \"\";" : "")}");
+				sb.AppendLine($"{t(1)}[NPoco.Column]");
+				sb.AppendLine($"{t(1)}public {p.PropType + (p.IsNullable ? "?" : "")} {p.PropName} {{ get; set; }}{((p.PropType == "string" && !p.IsNullable) ? " = \"\";" : "")}");
 			}
 			string props = sb.ToString();
 
@@ -72,16 +74,15 @@ namespace {namespaceName}
 				using System;
 				using NPoco;
 
-				namespace {{modelNamespace}}
+				namespace {{modelNamespace}};
+				
+				[TableName("{{poco.EntityName}}")]{{pk}}
+				[ExplicitColumns]{{tsm}}
+				public partial class {{poco.ClassName}}
 				{
-					[TableName("{{poco.EntityName}}")]{{pk}}
-					[ExplicitColumns]
-					[TypeScriptModel]
-					public partial class {{poco.ClassName}}
-					{
 				{{props}}
-					}
 				}
+				
 				""";
 		}
 
@@ -185,15 +186,15 @@ namespace {namespaceName}
 			return new String('\t', n);
 		}
 
-		private static string hr(int n = 1)
-		{
-			return n switch
-			{
-				< 1 => "",
-				1 => "\r\n",
-				_ => string.Concat(Enumerable.Repeat("\r\n", n))
-			};
-		}
+		//private static string hr(int n = 1)
+		//{
+		//	return n switch
+		//	{
+		//		< 1 => "",
+		//		1 => "\r\n",
+		//		_ => string.Concat(Enumerable.Repeat("\r\n", n))
+		//	};
+		//}
 
 	}
 }

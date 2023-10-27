@@ -26,6 +26,8 @@ namespace NpocoMapper.Ops
 			string fullPath = entityType switch
 			{
 				EntityType.ITypeScript => $@"{dirPath}\GeneratedModels.d.ts",
+				EntityType.RepoRo => $@"{dirPath}\{className}Db.cs",
+				EntityType.RepoRw => $@"{dirPath}\{className}Db.cs",
 				_ => $@"{dirPath}\{className}.cs"
 			};
 

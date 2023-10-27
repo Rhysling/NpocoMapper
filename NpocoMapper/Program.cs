@@ -14,15 +14,18 @@ namespace NpocoMapper
 
 			// Settings ********************************
 			string applicationName = "BotanicaStore";
-			string dbName = applicationName + "Db";
+
+			//string dbName = applicationName + "Db";
+			string dbName = "TestingPocos";
+
 			string connectionString = $"Data Source=localhost;Initial Catalog={dbName};Integrated Security=True";
 
 			//string basePath = @"C:\Users\B\Documents\yy\tp1";
 			string basePath = @"D:\UserData\Documents\AppDev\NpocoMapper\NpocoMapper.Demo";
 
+
 			string modelPath = basePath + @"\Models\Generated";
 			string repoPath = basePath + @"\Repos\Generated";
-
 
 			string modelNamespace = applicationName + ".Models";
 			string repoNamespace = applicationName + ".Repos";
@@ -38,7 +41,7 @@ namespace NpocoMapper
 
 
 			// Table name patterns to ignore:
-			string[] ignoreTableNames = new string[] { "MarketData" };
+			string[] ignoreTableNames = new string[] { "tpPlantPricesOld" };
 
 			// Force Enums from specified tables
 			var forceEnumList = new List<EnumPoco>{

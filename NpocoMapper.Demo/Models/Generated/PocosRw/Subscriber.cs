@@ -1,12 +1,11 @@
-
 using System;
 using NPoco;
 
 namespace BotanicaStore.Models
 {
-	[TableName("Subscribers")]
-	[PrimaryKey("ItemId", AutoIncrement = true)]
+	[TableName("Subscribers")][PrimaryKey("ItemId", AutoIncrement = true)]
 	[ExplicitColumns]
+	[TypeScriptModel]
 	public partial class Subscriber
 	{
 		[NPoco.Column]

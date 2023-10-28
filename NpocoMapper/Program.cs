@@ -20,8 +20,8 @@ namespace NpocoMapper
 
 			string connectionString = $"Data Source=localhost;Initial Catalog={dbName};Integrated Security=True";
 
-			//string basePath = @"C:\Users\B\Documents\yy\tp1";
-			string basePath = @"D:\UserData\Documents\AppDev\NpocoMapper\NpocoMapper.Demo";
+			string basePath = @"C:\Users\B\Documents\AppDev\NpocoMapper\NpocoMapper.Demo";
+			//string basePath = @"D:\UserData\Documents\AppDev\NpocoMapper\NpocoMapper.Demo";
 
 
 			string modelPath = basePath + @"\Models\Generated";

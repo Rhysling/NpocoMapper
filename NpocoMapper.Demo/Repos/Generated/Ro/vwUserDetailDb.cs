@@ -7,24 +7,24 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class vwUserDetailDb : RepositoryBase
+public class VwUserDetailDb : RepositoryBase
 {
 	
-	public IEnumerable<vwUserDetail> All()
+	public IEnumerable<VwUserDetail> All()
 	{
-		return db.Fetch<vwUserDetail>("");
+		return db.Fetch<VwUserDetail>("");
 	}
 
 
 	//Example - filtered list:
-	public IEnumerable<vwUserDetail> FilteredList(string str1, string str2)
+	public IEnumerable<VwUserDetail> FilteredList(string str1, string str2)
 	{
-		return db.Fetch<vwUserDetail>("WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
+		return db.Fetch<VwUserDetail>("WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
 	}
 
 	//Example - paged & filtered list:
-	public Page<vwUserDetail> PagedFilteredList(string str1, string str2, long page, long itemsPerPage)
+	public Page<VwUserDetail> PagedFilteredList(string str1, string str2, long page, long itemsPerPage)
 	{
-		return db.Page<vwUserDetail>(page, itemsPerPage, "WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
+		return db.Page<VwUserDetail>(page, itemsPerPage, "WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
 	}
 }

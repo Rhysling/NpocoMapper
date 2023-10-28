@@ -6,7 +6,7 @@ namespace NpocoMapper.Demo.Models;
 [TableName("vwListedPlants")]
 [ExplicitColumns]
 [TypeScriptModel]
-public partial class vwListedPlant
+public partial class VwListedPlant
 {
 	[NPoco.Column]
 	public int PlantId { get; set; }

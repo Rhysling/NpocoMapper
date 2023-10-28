@@ -6,7 +6,7 @@ namespace NpocoMapper.Demo.Models;
 [TableName("vwWishListFlat")]
 [ExplicitColumns]
 [TypeScriptModel]
-public partial class vwWishListFlat
+public partial class VwWishListFlat
 {
 	[NPoco.Column]
 	public int UserId { get; set; }

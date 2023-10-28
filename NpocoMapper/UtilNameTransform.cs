@@ -198,7 +198,7 @@ namespace NpocoMapper
 		/// <returns></returns>
 		public static string ToHumanCase(string lowercaseAndUnderscoredWord)
 		{
-			return MakeInitialCaps(Regex.Replace(lowercaseAndUnderscoredWord, @"_", " "));
+			return MakeInitialCaps(Regex.Replace(lowercaseAndUnderscoredWord, @"_", " "), lowerRest:true);
 		}
 
 
@@ -217,9 +217,9 @@ namespace NpocoMapper
 		/// </summary>
 		/// <param name="word">The word.</param>
 		/// <returns></returns>
-		public static string MakeInitialCaps(string word)
+		public static string MakeInitialCaps(string word, bool lowerRest)
 		{
-			return String.Concat(word.Substring(0, 1).ToUpper(), word.Substring(1).ToLower());
+			return String.Concat(word.Substring(0, 1).ToUpper(), lowerRest ? word.Substring(1).ToLower() : word.Substring(1));
 		}
 
 		/// <summary>

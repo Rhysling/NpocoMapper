@@ -7,24 +7,24 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class vwWishListEmailDb : RepositoryBase
+public class VwWishListEmailDb : RepositoryBase
 {
 	
-	public IEnumerable<vwWishListEmail> All()
+	public IEnumerable<VwWishListEmail> All()
 	{
-		return db.Fetch<vwWishListEmail>("");
+		return db.Fetch<VwWishListEmail>("");
 	}
 
 
 	//Example - filtered list:
-	public IEnumerable<vwWishListEmail> FilteredList(string str1, string str2)
+	public IEnumerable<VwWishListEmail> FilteredList(string str1, string str2)
 	{
-		return db.Fetch<vwWishListEmail>("WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
+		return db.Fetch<VwWishListEmail>("WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
 	}
 
 	//Example - paged & filtered list:
-	public Page<vwWishListEmail> PagedFilteredList(string str1, string str2, long page, long itemsPerPage)
+	public Page<VwWishListEmail> PagedFilteredList(string str1, string str2, long page, long itemsPerPage)
 	{
-		return db.Page<vwWishListEmail>(page, itemsPerPage, "WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
+		return db.Page<VwWishListEmail>(page, itemsPerPage, "WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
 	}
 }

@@ -7,24 +7,24 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class vwShoppingListSummaryDb : RepositoryBase
+public class VwShoppingListSummaryDb : RepositoryBase
 {
 	
-	public IEnumerable<vwShoppingListSummary> All()
+	public IEnumerable<VwShoppingListSummary> All()
 	{
-		return db.Fetch<vwShoppingListSummary>("");
+		return db.Fetch<VwShoppingListSummary>("");
 	}
 
 
 	//Example - filtered list:
-	public IEnumerable<vwShoppingListSummary> FilteredList(string str1, string str2)
+	public IEnumerable<VwShoppingListSummary> FilteredList(string str1, string str2)
 	{
-		return db.Fetch<vwShoppingListSummary>("WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
+		return db.Fetch<VwShoppingListSummary>("WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
 	}
 
 	//Example - paged & filtered list:
-	public Page<vwShoppingListSummary> PagedFilteredList(string str1, string str2, long page, long itemsPerPage)
+	public Page<VwShoppingListSummary> PagedFilteredList(string str1, string str2, long page, long itemsPerPage)
 	{
-		return db.Page<vwShoppingListSummary>(page, itemsPerPage, "WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
+		return db.Page<VwShoppingListSummary>(page, itemsPerPage, "WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
 	}
 }

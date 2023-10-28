@@ -7,24 +7,24 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class vwWishListEmailItemDb : RepositoryBase
+public class VwWishListEmailItemDb : RepositoryBase
 {
 	
-	public IEnumerable<vwWishListEmailItem> All()
+	public IEnumerable<VwWishListEmailItem> All()
 	{
-		return db.Fetch<vwWishListEmailItem>("");
+		return db.Fetch<VwWishListEmailItem>("");
 	}
 
 
 	//Example - filtered list:
-	public IEnumerable<vwWishListEmailItem> FilteredList(string str1, string str2)
+	public IEnumerable<VwWishListEmailItem> FilteredList(string str1, string str2)
 	{
-		return db.Fetch<vwWishListEmailItem>("WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
+		return db.Fetch<VwWishListEmailItem>("WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
 	}
 
 	//Example - paged & filtered list:
-	public Page<vwWishListEmailItem> PagedFilteredList(string str1, string str2, long page, long itemsPerPage)
+	public Page<VwWishListEmailItem> PagedFilteredList(string str1, string str2, long page, long itemsPerPage)
 	{
-		return db.Page<vwWishListEmailItem>(page, itemsPerPage, "WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
+		return db.Page<VwWishListEmailItem>(page, itemsPerPage, "WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
 	}
 }

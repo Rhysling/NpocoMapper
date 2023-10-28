@@ -42,7 +42,7 @@ namespace NpocoMapper.Ops
 				return new Poco {
 				EntityName = s[0],
 				EntityType = s[1],
-				ClassName = MakeSingular(CleanName(s[0])),
+				ClassName = MakeInitialCaps(MakeSingular(CleanName(s[0])), lowerRest: false),
 				ClassType = MapClassType(s[0], s[1], props),
 				PrimaryKeys = string.Join(',', props.Where(a => a.IsPk).Select(a => a.PropName)),
 				IsAutoIncrement = props.First().IsIdentity,

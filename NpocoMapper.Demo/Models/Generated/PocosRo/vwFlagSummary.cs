@@ -6,7 +6,7 @@ namespace NpocoMapper.Demo.Models;
 [TableName("vwFlagSummary")]
 [ExplicitColumns]
 [TypeScriptModel]
-public partial class vwFlagSummary
+public partial class VwFlagSummary
 {
 	[NPoco.Column]
 	public string? Flag { get; set; }

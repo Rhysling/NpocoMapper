@@ -169,7 +169,7 @@ namespace NpocoMapper
 			{
 				for (int i = rules.Count - 1; i >= 0; i--)
 				{
-					string currentPass = rules[i].Apply(word);
+					string? currentPass = rules[i].Apply(word);
 					if (currentPass != null)
 					{
 						result = currentPass;
@@ -311,7 +311,7 @@ namespace NpocoMapper
 			/// </summary>
 			/// <param name="word">The word.</param>
 			/// <returns></returns>
-			public string Apply(string word)
+			public string? Apply(string word)
 			{
 				if (!regex.IsMatch(word))
 					return null;

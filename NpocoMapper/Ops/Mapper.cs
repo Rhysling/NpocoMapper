@@ -12,6 +12,8 @@ namespace NpocoMapper.Ops
 	{
 		public static List<Poco> MapColumnsToPocos (List<Column> cols)
 		{
+			foreach (var c in cols)
+				c.EntityType = MakeInitialCaps(c.EntityType, lowerRest: false);
 
 			var pocos = cols.GroupBy(a => a.EntityName + "|" + a.EntityType, mapColToPocoProp, mapKeyPropsToPoco).ToList();
 			//TODO - set other poco values
@@ -53,23 +55,6 @@ namespace NpocoMapper.Ops
 
 		}
 
-		public static List<EnumPoco> MapPocosToEnums(List<Poco> pocos, List<EnumPoco> forceEnumList, string connString)
-		{
-			var epl = pocos.Where(a => a.ClassType == "Enum")
-				.Select(a => new EnumPoco {
-					EntityName = a.EntityName,
-					EnumName = a.ClassName
-				}).ToList();
-
-			// TODO: Handle forceEnumList
-
-			foreach (var e in epl)
-				e.Values = DbOps.LoadEnumValus(connString, e);
-
-			return epl;
-		}
-
-
 		private static string MapClassType(string entityName, string entityType, IEnumerable<PocoProp> props)
 		{
 			if (entityName.EndsWith("Enum"))
@@ -87,7 +72,9 @@ namespace NpocoMapper.Ops
 			{
 				"bigint" => "long",
 				"smallint" => "short",
-				"int" => "int",
+
+				string a when a.Contains("int", StringComparison.CurrentCultureIgnoreCase) => "int",
+
 				"uniqueidentifier" => "Guid",
 
 				"smalldatetime" => "DateTime",
@@ -95,8 +82,9 @@ namespace NpocoMapper.Ops
 				"date" => "DateTime",
 				"time" => "DateTime",
 
-				"float" => "double",
-				"real" => "float",
+				string a when a.Contains("float", StringComparison.CurrentCultureIgnoreCase) => "double",
+				string a when a.Contains("real", StringComparison.CurrentCultureIgnoreCase) => "double",
+				string a when a.Contains("doub", StringComparison.CurrentCultureIgnoreCase) => "double",
 
 				"numeric" => "decimal",
 				"smallmoney" => "decimal",
@@ -105,11 +93,13 @@ namespace NpocoMapper.Ops
 
 				"tinyint" => "byte",
 				"bit" => "bool",
+				string a when a.Contains("bool", StringComparison.CurrentCultureIgnoreCase) => "bool",
 
 				"image" => "byte[]",
 				"binary" => "byte[]",
 				"varbinary" => "byte[]",
 				"timestamp" => "byte[]",
+				string a when a.Contains("blob", StringComparison.CurrentCultureIgnoreCase) => "byte[]",
 
 				//"geography" => "Microsoft.SqlServer.Types.SqlGeography",
 				//"geometry" => "Microsoft.SqlServer.Types.SqlGeometry",

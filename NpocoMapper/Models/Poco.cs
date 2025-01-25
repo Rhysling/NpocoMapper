@@ -8,6 +8,7 @@ namespace NpocoMapper.Models
 {
 	public class Poco
 	{
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 		public string EntityName { get; set; }
 		public string EntityType { get; set; }
 		public string ClassName { get; set; }
@@ -16,5 +17,6 @@ namespace NpocoMapper.Models
 		public bool IsAutoIncrement { get; set; }
 		public bool Ignore { get; set; }
 		public List<PocoProp> Props { get; set; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 	}
 }

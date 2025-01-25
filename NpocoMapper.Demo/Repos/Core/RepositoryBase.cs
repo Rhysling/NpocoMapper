@@ -6,7 +6,7 @@ namespace NpocoMapper.Demo.Repos.Core
 {
 	public abstract class RepositoryBase : IDisposable
 	{
-		protected NPoco.Database db = new NPoco.Database(AppSettings.ConnectionString, DatabaseType.SqlServer2012, System.Data.SqlClient.SqlClientFactory.Instance);
+		protected NPoco.Database db = new NPoco.Database(AppSettings.ConnectionString, DatabaseType.SqlServer2012, Microsoft.Data.SqlClient.SqlClientFactory.Instance);
 		bool _disposed = false;
 
 		public void Dispose()
@@ -34,7 +34,9 @@ namespace NpocoMapper.Demo.Repos.Core
 			}
 
 			// Release any unmanaged objects. Set the object references to null
+#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
 			db = null;
+#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
 
 			_disposed = true;
 		}

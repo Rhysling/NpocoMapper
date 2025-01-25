@@ -8,6 +8,7 @@ namespace NpocoMapper.Models
 {
 	public class Column
 	{
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 		public string EntityName { get; set; }
 		public string EntityType { get; set; }
 		public int ColumnSeq { get; set; }
@@ -18,6 +19,7 @@ namespace NpocoMapper.Models
 		public int Precision { get; set; }
 		public bool IsPk { get; set; }
 		public string ConstraintName { get; set; }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
 		public bool IsIdentity { get; set; }
 		public bool IsComputed { get; set; }
 

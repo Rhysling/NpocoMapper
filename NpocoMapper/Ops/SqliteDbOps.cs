@@ -4,6 +4,7 @@ using NpocoMapper.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using static System.Reflection.Metadata.BlobBuilder;
 
 namespace NpocoMapper.Ops;
@@ -23,8 +24,8 @@ public class SqliteDbOps(string connString) : IDbOps
 		@"
 			SELECT
 				type,
-				name
-				--sql
+				name,
+				sql
 			FROM sqlite_schema
 			WHERE
 				(name <> 'sqlite_sequence')
@@ -41,7 +42,8 @@ public class SqliteDbOps(string connString) : IDbOps
 				slObjs.Add(new SqliteObj
 				{
 					Type = reader.GetString(0),
-					Name = reader.GetString(1)
+					Name = reader.GetString(1),
+					Sql = reader.GetString(2)
 				});
 			}
 		}
@@ -74,23 +76,11 @@ public class SqliteDbOps(string connString) : IDbOps
 				}
 		}
 
-		var pkNames = new List<string>();
+		var autoIncRE = new Regex("PRIMARY KEY.*AUTOINCREMENT", RegexOptions.None);
+		var autoIncTables = slObjs.Where(a => autoIncRE.IsMatch(a.Sql)).ToList();
 
-		command.CommandText = "SELECT * FROM SQLITE_SEQUENCE";
-		using (var reader = command.ExecuteReader())
-		{
-			while (reader.Read())
-			{
-				pkNames.Add(reader.GetString(0));
-			}
-		}
-
-		var autoIncCols = cols.Where(a => pkNames.Contains(a.EntityName) && a.IsPk).ToList();
-
-		foreach (var c in autoIncCols)
-		{
-			c.IsIdentity = true;
-		}
+		foreach (var t in autoIncTables)
+			cols.Where(a => a.EntityName == t.Name && a.IsPk).First().IsIdentity = true;
 
 		connection.Close();
 		SqliteConnection.ClearAllPools();

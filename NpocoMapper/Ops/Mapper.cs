@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NpocoMapper.Models;
-using static NpocoMapper.UtilNameTransform;
+using static NpocoMapper.Ops.UtilNameTransform;
 
 namespace NpocoMapper.Ops
 {
@@ -96,9 +96,8 @@ namespace NpocoMapper.Ops
 				string a when a.Contains("bool", StringComparison.CurrentCultureIgnoreCase) => "bool",
 
 				"image" => "byte[]",
-				"binary" => "byte[]",
-				"varbinary" => "byte[]",
 				"timestamp" => "byte[]",
+				string a when a.Contains("binary", StringComparison.CurrentCultureIgnoreCase) => "byte[]",
 				string a when a.Contains("blob", StringComparison.CurrentCultureIgnoreCase) => "byte[]",
 
 				//"geography" => "Microsoft.SqlServer.Types.SqlGeography",

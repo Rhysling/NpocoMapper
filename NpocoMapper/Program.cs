@@ -30,6 +30,8 @@ namespace NpocoMapper
 				dbType: DbType.Sqlite,
 				dbConnStr: @"Data Source=D:\UserData\Documents\AppDev\NpocoMapper\NpocoMapper.Demo\db\TestGen.sqlite;"
 			);
+			settings.OverwritePocos = true;
+			settings.OverwriteRepos = true;
 
 			var runner = new Runner(settings);
 			//runner.Run();

@@ -1,8 +1,10 @@
-﻿using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Data.Sqlite;
 using NpocoMapper.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static System.Reflection.Metadata.BlobBuilder;
 
 namespace NpocoMapper.Ops;
 
@@ -12,12 +14,11 @@ public class SqliteDbOps(string connString) : IDbOps
 	{
 		var cols = new List<Column>();
 		var slObjs = new List<SqliteObj>();
-		//var slObjCols = new List<SqliteObjCol>();
 
 		using var connection = new SqliteConnection(connString);
 		connection.Open();
 
-		var command = connection.CreateCommand();
+		using var command = connection.CreateCommand();
 		command.CommandText =
 		@"
 			SELECT
@@ -91,6 +92,7 @@ public class SqliteDbOps(string connString) : IDbOps
 			c.IsIdentity = true;
 		}
 
+		connection.Close();
 		SqliteConnection.ClearAllPools();
 
 		return cols;
@@ -98,6 +100,42 @@ public class SqliteDbOps(string connString) : IDbOps
 
 	public List<EnumPocoProp> LoadEnumValus(EnumPoco enumPoco)
 	{
-		throw new NotImplementedException();
+		var vals = new List<EnumPocoProp>();
+
+		string sql = $"""
+			SELECT
+				[{enumPoco.IdColumnName}],
+				[{enumPoco.NameColumnName}],
+				[{enumPoco.DescriptionColumnName}]
+			FROM
+				[{enumPoco.EntityName}]
+			ORDER BY
+				[{enumPoco.IdColumnName}];
+			""";
+
+		using var connection = new SqliteConnection(connString);
+		connection.Open();
+
+		using var command = connection.CreateCommand();
+		command.CommandText = sql;
+
+		using (var rdr = command.ExecuteReader())
+		{
+			while (rdr.Read())
+			{
+				var val = new EnumPocoProp();
+
+				val.Id = rdr.GetInt32(0);
+				val.Name = UtilNameTransform.CleanName(rdr.GetString(1));
+				val.Description = rdr.IsDBNull(2) ? rdr.GetString(2) : "";
+
+				vals.Add(val);
+			}
+		}
+
+		connection.Close();
+		SqliteConnection.ClearAllPools();
+
+		return vals;
 	}
 }

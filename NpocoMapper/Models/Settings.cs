@@ -61,9 +61,9 @@ public class Settings
 		//new EnumPoco {
 		//	EntityName = "ListObjects",
 		//	EnumName = "ListObjectsEnum",
-		//	IdColumnName = "ShortName",
-		//	NameColumnName = "Id",
-		//	DescriptionColumnName = "Description"
+		//	IdColumnName = "TheIdCol",
+		//	NameColumnName = "HereIsShorty",
+		//	DescriptionColumnName = "The Description Here"
 		//}
 	//};
 

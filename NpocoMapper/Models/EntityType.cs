@@ -11,6 +11,7 @@ namespace NpocoMapper.Models
 		PocoRo = 2,
 		RepoRw = 3,
 		RepoRo = 4,
-		ITypeScript = 5
+		RepoBase = 5,
+		ITypeScript = 6
 	}
 }

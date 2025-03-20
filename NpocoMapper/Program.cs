@@ -34,8 +34,8 @@ namespace NpocoMapper
 			settings.OverwriteRepos = true;
 
 			var runner = new Runner(settings);
-			//runner.Run();
-			runner.Test();
+			runner.Run();
+			//runner.Test();
 
 			Console.WriteLine("Done.");
 			Console.ReadKey();

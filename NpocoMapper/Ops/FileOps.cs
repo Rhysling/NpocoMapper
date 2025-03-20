@@ -18,6 +18,7 @@ namespace NpocoMapper.Ops
 				EntityType.ITypeScript => path,
 				EntityType.RepoRw => Path.Combine(path + @"\Rw"),
 				EntityType.RepoRo => Path.Combine(path + @"\Ro"),
+				EntityType.RepoBase => Path.Combine(path + @"\Core"),
 				_ => throw new Exception("GetEntityFullPath - not all types covered")
 			};
 

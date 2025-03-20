@@ -1,5 +1,6 @@
 ﻿using NpocoMapper.Models;
 using System;
+using System.Data.Common;
 using System.Linq;
 using System.Text;
 
@@ -173,6 +174,75 @@ namespace {namespaceName}
 				{
 					return db.Page<{{poco.ClassName}}>(page, itemsPerPage, "WHERE(v1 = @p1) AND(v2 = @p2)", new {p1 = str1, p2 = str2});
 				}
+			}
+			""";
+	}
+
+	public static string WriteRepoBase(string repoNamespace, DbType dbType)
+	{
+		string factoryTypeName = dbType switch
+		{
+			DbType.Sqlite => "Microsoft.Data.Sqlite.SqliteFactory.Instance",
+			DbType.MsSql => "Microsoft.Data.SqlClient.SqlClientFactory.Instance",
+			_ => "Microsoft.Data.SqlClient.SqlClientFactory.Instance"
+		};
+
+		string dbTypeName = dbType switch
+		{
+			DbType.Sqlite => "SQLite",
+			DbType.MsSql => "SqlServer2012",
+			_ => "SqlServer2012"
+		};
+
+		return $$"""
+			using NPoco;
+			using System.Data.Common;
+
+			namespace {{repoNamespace}}.Core;
+			
+			public abstract class RepositoryBase : IDisposable
+			{
+				protected Database db;
+				bool _disposed = false;
+
+				public RepositoryBase(string connStr)
+				{
+					DbProviderFactory factory = {{factoryTypeName}};
+					db = new Database(connStr, DatabaseType.{{dbTypeName}}, factory);
+					//db.Execute("PRAGMA journal_mode=WAL;");
+				}
+
+				public void Dispose()
+				{
+					Dispose(true);
+					GC.SuppressFinalize(this);
+				}
+
+				~RepositoryBase()
+				{
+					Dispose(false);
+				}
+
+				protected virtual void Dispose(bool disposing)
+				{
+					if (_disposed)
+						return;
+
+					if (disposing)
+					{
+						// free other managed objects that implement, IDisposable only
+
+						db?.Dispose();
+					}
+
+					// Release any unmanaged objects. Set the object references to null
+			#pragma warning disable CS8625 // Cannot convert null literal to non-nullable reference type.
+					db = null;
+			#pragma warning restore CS8625 // Cannot convert null literal to non-nullable reference type.
+
+					_disposed = true;
+				}
+				
 			}
 			""";
 	}

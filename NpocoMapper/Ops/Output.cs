@@ -43,6 +43,9 @@ public static class Output
 		// Repos
 		if (settings.GenerateRepos)
 		{
+			//Generate Repos/Core/RepositoryBase.cs
+			FileOps.SaveFile(settings.RepoPath, EntityType.RepoBase, "RepositoryBase", Writer.WriteRepoBase(settings.RepoNamespace,settings.DbType), false);
+
 			foreach (var p in pocos.Where(a => a.ClassType != "Enum"))
 			{
 				var et = p.ClassType == "Rw" ? EntityType.RepoRw : EntityType.RepoRo;

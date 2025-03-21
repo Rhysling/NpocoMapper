@@ -153,8 +153,8 @@ namespace {namespaceName}
 			using {{repoNamespace}}.Core;
 
 			namespace {{repoNamespace}};
-
-			public class {{poco.ClassName}}Db : RepositoryBase
+			
+			public class {{poco.ClassName}}Db(string connStr) : RepositoryBase(connStr)
 			{
 				{{rw}}
 				public IEnumerable<{{poco.ClassName}}> All()

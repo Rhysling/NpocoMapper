@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class PotSizeDb : RepositoryBase
+public class PotSizeDb(string connStr) : RepositoryBase(connStr)
 {
 		public int Save(PotSize entity)
 	{

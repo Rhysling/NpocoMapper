@@ -2,9 +2,11 @@
 using NPoco;
 using NpocoMapper.Demo.Services;
 
+// THis is the original
+
 namespace NpocoMapper.Demo.Repos.Core
 {
-	public abstract class RepositoryBase : IDisposable
+	public abstract class RepositoryBaseOld : IDisposable
 	{
 		protected NPoco.Database db = new NPoco.Database(AppSettings.ConnectionString, DatabaseType.SqlServer2012, Microsoft.Data.SqlClient.SqlClientFactory.Instance);
 		bool _disposed = false;
@@ -15,7 +17,7 @@ namespace NpocoMapper.Demo.Repos.Core
 			GC.SuppressFinalize(this);
 		}
 
-		~RepositoryBase()
+		~RepositoryBaseOld()
 		{
 			Dispose(false);
 		}

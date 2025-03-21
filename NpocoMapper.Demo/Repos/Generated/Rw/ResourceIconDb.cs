@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class ResourceIconDb : RepositoryBase
+public class ResourceIconDb(string connStr) : RepositoryBase(connStr)
 {
 		public string Save(ResourceIcon entity)
 	{

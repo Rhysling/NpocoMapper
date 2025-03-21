@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class VwFlagSummaryDb : RepositoryBase
+public class VwFlagSummaryDb(string connStr) : RepositoryBase(connStr)
 {
 	
 	public IEnumerable<VwFlagSummary> All()

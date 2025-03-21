@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class PlantPriceDb : RepositoryBase
+public class PlantPriceDb(string connStr) : RepositoryBase(connStr)
 {
 		public int Save(PlantPrice entity)
 	{

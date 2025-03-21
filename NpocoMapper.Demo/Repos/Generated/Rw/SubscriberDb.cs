@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class SubscriberDb : RepositoryBase
+public class SubscriberDb(string connStr) : RepositoryBase(connStr)
 {
 		public int Save(Subscriber entity)
 	{

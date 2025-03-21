@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class VwWishListEmailItemDb : RepositoryBase
+public class VwWishListEmailItemDb(string connStr) : RepositoryBase(connStr)
 {
 	
 	public IEnumerable<VwWishListEmailItem> All()

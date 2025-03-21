@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class CalendarDb : RepositoryBase
+public class CalendarDb(string connStr) : RepositoryBase(connStr)
 {
 		public int Save(Calendar entity)
 	{

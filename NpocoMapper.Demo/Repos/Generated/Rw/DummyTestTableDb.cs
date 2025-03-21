@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class DummyTestTableDb : RepositoryBase
+public class DummyTestTableDb(string connStr) : RepositoryBase(connStr)
 {
 		public int Save(DummyTestTable entity)
 	{

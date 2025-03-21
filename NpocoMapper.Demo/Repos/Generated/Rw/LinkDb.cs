@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class LinkDb : RepositoryBase
+public class LinkDb(string connStr) : RepositoryBase(connStr)
 {
 		public int Save(Link entity)
 	{

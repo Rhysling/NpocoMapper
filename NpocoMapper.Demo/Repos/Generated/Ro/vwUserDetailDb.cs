@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class VwUserDetailDb : RepositoryBase
+public class VwUserDetailDb(string connStr) : RepositoryBase(connStr)
 {
 	
 	public IEnumerable<VwUserDetail> All()

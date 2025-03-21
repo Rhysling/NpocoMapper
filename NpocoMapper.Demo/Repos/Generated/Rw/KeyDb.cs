@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class KeyDb : RepositoryBase
+public class KeyDb(string connStr) : RepositoryBase(connStr)
 {
 		public string Save(Key entity)
 	{

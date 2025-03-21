@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class VwShoppingListSummaryDb : RepositoryBase
+public class VwShoppingListSummaryDb(string connStr) : RepositoryBase(connStr)
 {
 	
 	public IEnumerable<VwShoppingListSummary> All()

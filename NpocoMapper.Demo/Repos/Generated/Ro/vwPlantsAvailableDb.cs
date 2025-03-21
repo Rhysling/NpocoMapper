@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class VwPlantsAvailableDb : RepositoryBase
+public class VwPlantsAvailableDb(string connStr) : RepositoryBase(connStr)
 {
 	
 	public IEnumerable<VwPlantsAvailable> All()

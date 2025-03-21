@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class WishListDb : RepositoryBase
+public class WishListDb(string connStr) : RepositoryBase(connStr)
 {
 		public int Save(WishList entity)
 	{

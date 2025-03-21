@@ -7,7 +7,7 @@ using NpocoMapper.Demo.Repos.Core;
 
 namespace NpocoMapper.Demo.Repos;
 
-public class UserDb : RepositoryBase
+public class UserDb(string connStr) : RepositoryBase(connStr)
 {
 		public int Save(User entity)
 	{

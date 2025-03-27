@@ -10,12 +10,15 @@
     <Compile Remove="Generated\**" />
     <Compile Remove="_Generated\**" />
     <Compile Remove="_Generator\**" />
+    <Compile Remove="_Generator_OLD\**" />
     <EmbeddedResource Remove="Generated\**" />
     <EmbeddedResource Remove="_Generated\**" />
     <EmbeddedResource Remove="_Generator\**" />
+    <EmbeddedResource Remove="_Generator_OLD\**" />
     <None Remove="Generated\**" />
     <None Remove="_Generated\**" />
     <None Remove="_Generator\**" />
+    <None Remove="_Generator_OLD\**" />
   </ItemGroup>
 
   <ItemGroup>
@@ -27,7 +30,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.SqlClient" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.3" />
   </ItemGroup>
 
 </Project>

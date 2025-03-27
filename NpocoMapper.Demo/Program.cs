@@ -1,12 +1,14 @@
 ﻿using System;
 
-namespace NpocoMapper.Demo
+namespace NpocoMapper.Demo;
+
+class Program
 {
-	class Program
+	static void Main(string[] args)
 	{
-		static void Main(string[] args)
-		{
-			Console.WriteLine("Hello World!");
-		}
+		Demos.RunforSqlite();
+
+		Console.WriteLine("Done.");
+		Console.ReadKey();
 	}
 }

@@ -7,8 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Repos\Core\CustomTypeMapper.cs" />
-    <Compile Remove="Repos\Core\RepositoryInterfaces.cs" />
+    <Compile Remove="Repos\Core\**" />
+    <EmbeddedResource Remove="Repos\Core\**" />
+    <None Remove="Repos\Core\**" />
   </ItemGroup>
 
   <ItemGroup>

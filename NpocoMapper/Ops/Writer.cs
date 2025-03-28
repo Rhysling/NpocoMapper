@@ -196,6 +196,7 @@ namespace {namespaceName}
 
 		return $$"""
 			using NPoco;
+			using System;
 			using System.Data.Common;
 
 			namespace {{repoNamespace}}.Core;

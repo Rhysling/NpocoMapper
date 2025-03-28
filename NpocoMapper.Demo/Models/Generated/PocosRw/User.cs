@@ -3,24 +3,20 @@ using NPoco;
 
 namespace NpocoMapper.Demo.Models;
 
-[TableName("Users")][PrimaryKey("UserId", AutoIncrement = true)]
+[TableName("Users")][PrimaryKey("Id", AutoIncrement = true)]
 [ExplicitColumns]
 [TypeScriptModel]
 public partial class User
 {
 	[NPoco.Column]
-	public int UserId { get; set; }
+	public int Id { get; set; }
 	[NPoco.Column]
-	public string Email { get; set; } = "";
+	public string FullName { get; set; } = "";
 	[NPoco.Column]
-	public string? FullName { get; set; }
+	public string? NullableString { get; set; }
 	[NPoco.Column]
-	public bool IsAdmin { get; set; }
+	public string LastUpdate { get; set; } = "";
 	[NPoco.Column]
-	public DateTime CreatedDate { get; set; }
-	[NPoco.Column]
-	public DateTime LastLoginDate { get; set; }
-	[NPoco.Column]
-	public int LoginCount { get; set; }
+	public bool IsDeleted { get; set; }
 
 }

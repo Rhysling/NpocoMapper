@@ -12,7 +12,7 @@ public class UserDb(string connStr) : RepositoryBase(connStr)
 		public int Save(User entity)
 	{
 		db.Save<User>(entity);
-		return entity.UserId;
+		return entity.Id;
 	}
 
 	public bool Save(IEnumerable<User> items)
@@ -26,8 +26,8 @@ public class UserDb(string connStr) : RepositoryBase(connStr)
 
 	public bool Delete(int id)
 	{
-		
-		db.Delete<User>(id);
+		string sql = "UPDATE [Users] SET IsDeleted = 1 WHERE (Id = @0);";
+		db.Execute(sql, id);
 		return true;
 	}
 

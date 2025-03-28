@@ -3,14 +3,16 @@ using NPoco;
 
 namespace NpocoMapper.Demo.Models;
 
-[TableName("TpDummy")][PrimaryKey("IdKeyNoIncrement", AutoIncrement = false)]
+[TableName("TestTableUnkeyed")]
 [ExplicitColumns]
 [TypeScriptModel]
-public partial class TpDummy
+public partial class TestTableUnkeyed
 {
 	[NPoco.Column]
 	public int IdKeyNoIncrement { get; set; }
 	[NPoco.Column]
 	public string? FullName { get; set; }
+	[NPoco.Column]
+	public string LastUpdate { get; set; } = "";
 
 }

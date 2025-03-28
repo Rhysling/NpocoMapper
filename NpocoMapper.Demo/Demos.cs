@@ -12,27 +12,31 @@ public static class Demos
 {
 	public static void RunforSqlite()
 	{
-		using var dttDb = new DummyTestTable2Db(Services.AppSettings.ConnectionStringSqlite);
+		using var ttDb = new TestTableDb(Services.AppSettings.ConnectionStringSqlite);
 
-		var all = dttDb.All();
+		var all = ttDb.All();
+		Console.WriteLine($"TestTable starts with ({all.Count()}) rows.");
+
 		int nextId = all.Max(x => x.FirstKey) + 1;
 
-		var item = new DummyTestTable2
+		var item = new TestTable
 		{
 			FirstKey = 0,
 			SecondNullable = $"Foo {nextId}",
 			DateThing = DateTime.Now,
 			InfoNullable = $"Bar {nextId}",
 			MoreStuff = null,
-			BoolThing = nextId % 2 == 1,
+			BoolThing = nextId % 2 == 0,
 			BitThing = nextId % 2 == 1
 		};
 
 
-		dttDb.Save(item);
+		ttDb.Save(item);
 
 		Console.WriteLine($"Saved: FirstKey = {item.FirstKey}");
-		Console.WriteLine($"All: {all.Count()}");
+		Console.WriteLine($"All count is now: {ttDb.All().Count()}.");
+
+
 
 	}
 }

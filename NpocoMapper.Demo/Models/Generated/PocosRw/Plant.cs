@@ -39,7 +39,7 @@ public partial class Plant
 	[NPoco.Column]
 	public string Slug { get; set; } = "";
 	[NPoco.Column]
-	public DateTime LastUpdate { get; set; }
+	public string LastUpdate { get; set; } = "";
 	[NPoco.Column]
 	public string? Flag { get; set; }
 	[NPoco.Column]

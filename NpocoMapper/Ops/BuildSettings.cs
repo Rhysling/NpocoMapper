@@ -86,15 +86,15 @@ public class BuildSettings
 			dbConnStr=TheConnectionString
 
 		OPTIONAL:
-			generateEnums=true|false
-			overwriteEnums=true|false
-			generatePocos=true|false
-			overwritePocos=true|false
-			generateRepos=true|false
-			overwriteRepos=true|false
-			includeTsModelAttribute=true|false
+			generateEnums=true|false (default true)
+			overwriteEnums=true|false (default true)
+			generatePocos=true|false (default true)
+			overwritePocos=true|false (default false)
+			generateRepos=true|false (default true)
+			overwriteRepos=true|false (default false)
+			includeTsModelAttribute=true|false (not used)
 
-			ignoreTableNames=table1,table2,table3
+			ignoreTableNames=table1,table2,table3 (default empty)
 		
 		""";
 

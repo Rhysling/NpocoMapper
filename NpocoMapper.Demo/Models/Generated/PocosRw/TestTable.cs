@@ -3,7 +3,8 @@ using NPoco;
 
 namespace NpocoMapper.Demo.Models;
 
-[TableName("TestTable")][PrimaryKey("FirstKey", AutoIncrement = true)]
+[TableName("TestTable")]
+[PrimaryKey("FirstKey", AutoIncrement = true)]
 [ExplicitColumns]
 [TypeScriptModel]
 public partial class TestTable

@@ -3,21 +3,19 @@ using NPoco;
 
 namespace NpocoMapper.Demo.Models;
 
-[TableName("Users")]
+[TableName("TestIntPk")]
 [PrimaryKey("Id", AutoIncrement = true)]
 [ExplicitColumns]
 [TypeScriptModel]
-public partial class User
+public partial class TestIntPk
 {
 	[NPoco.Column]
 	public int Id { get; set; }
 	[NPoco.Column]
 	public string FullName { get; set; } = "";
 	[NPoco.Column]
-	public string? NullableString { get; set; }
+	public string DateAsText { get; set; } = "";
 	[NPoco.Column]
-	public string LastUpdate { get; set; } = "";
-	[NPoco.Column]
-	public bool IsDeleted { get; set; }
+	public DateTime DateAsDateTime { get; set; }
 
 }

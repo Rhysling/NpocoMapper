@@ -1,4 +1,5 @@
 ﻿using System;
+using NpocoMapper.Models;
 using NpocoMapper.Ops;
 
 namespace NpocoMapper;

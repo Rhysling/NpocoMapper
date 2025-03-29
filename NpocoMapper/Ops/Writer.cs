@@ -55,6 +55,7 @@ namespace {namespaceName}
 		if (!String.IsNullOrWhiteSpace(poco.PrimaryKeys))
 		{
 			pk = $$"""
+
 				[PrimaryKey("{{poco.PrimaryKeys}}", AutoIncrement = {{(poco.IsAutoIncrement ? "true" : "false")}})]
 				""";
 		}

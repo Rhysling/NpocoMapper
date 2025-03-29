@@ -77,8 +77,7 @@ namespace NpocoMapper.Ops
 
 				"uniqueidentifier" => "Guid",
 
-				"smalldatetime" => "DateTime",
-				"datetime" => "DateTime",
+				string a when a.Contains("datetime", StringComparison.CurrentCultureIgnoreCase) => "DateTime",
 				"date" => "DateTime",
 				"time" => "DateTime",
 

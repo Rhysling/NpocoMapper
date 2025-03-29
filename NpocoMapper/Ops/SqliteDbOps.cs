@@ -72,8 +72,13 @@ public class SqliteDbOps(string connString) : IDbOps
 				}
 		}
 
-		var autoIncRE = new Regex("PRIMARY KEY.*AUTOINCREMENT", RegexOptions.None);
-		var autoIncTables = slObjs.Where(a => autoIncRE.IsMatch(a.Sql)).ToList();
+		string pattern1 = """CREATE\sTABLE[^\(]*\(\s*"?(\w+)"?\s*INT.*PRIMARY\sKEY\s*\("?\1""";
+		string pattern2 = """INT\w*\s+PRIMARY\s+KEY""";
+
+		var autoIncRE1 = new Regex(pattern1, RegexOptions.Singleline | RegexOptions.IgnoreCase);
+		var autoIncRE2 = new Regex(pattern2, RegexOptions.Singleline | RegexOptions.IgnoreCase);
+
+		var autoIncTables = slObjs.Where(a => autoIncRE1.IsMatch(a.Sql) || autoIncRE2.IsMatch(a.Sql)).ToList();
 
 		foreach (var t in autoIncTables)
 			cols.Where(a => a.EntityName == t.Name && a.IsPk).First().IsIdentity = true;

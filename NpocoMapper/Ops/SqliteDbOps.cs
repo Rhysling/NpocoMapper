@@ -1,11 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.Data.Sqlite;
+﻿using Microsoft.Data.Sqlite;
 using NpocoMapper.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
-using static System.Reflection.Metadata.BlobBuilder;
 
 namespace NpocoMapper.Ops;
 
@@ -20,8 +17,7 @@ public class SqliteDbOps(string connString) : IDbOps
 		connection.Open();
 
 		using var command = connection.CreateCommand();
-		command.CommandText =
-		@"
+		command.CommandText = """
 			SELECT
 				type,
 				name,
@@ -33,7 +29,7 @@ public class SqliteDbOps(string connString) : IDbOps
 			ORDER BY
 				type,
 				name;
-			";
+			""";
 
 		using (var reader = command.ExecuteReader())
 		{
@@ -88,7 +84,7 @@ public class SqliteDbOps(string connString) : IDbOps
 		return cols;
 	}
 
-	public List<EnumPocoProp> LoadEnumValus(EnumPoco enumPoco)
+	public List<EnumPocoProp> LoadEnumValues(EnumPoco enumPoco)
 	{
 		var vals = new List<EnumPocoProp>();
 

@@ -1,8 +1,6 @@
 ﻿using NpocoMapper.Models;
-using System;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
-using System.Text;
 
 namespace NpocoMapper.Ops;
 
@@ -18,7 +16,6 @@ public class MsSqlDbOps(string connString) : IDbOps
 			conn.Open();
 			var rdr = cmd.ExecuteReader();
 
-			// Call Read before accessing data.
 			while (rdr.Read())
 			{
 				Column col = new Column();
@@ -43,7 +40,7 @@ public class MsSqlDbOps(string connString) : IDbOps
 		return cols;
 	}
 
-	public List<EnumPocoProp> LoadEnumValus(EnumPoco enumPoco)
+	public List<EnumPocoProp> LoadEnumValues(EnumPoco enumPoco)
 	{
 		var vals = new List<EnumPocoProp>();
 
@@ -64,7 +61,6 @@ public class MsSqlDbOps(string connString) : IDbOps
 			conn.Open();
 			var rdr = cmd.ExecuteReader();
 
-			// Call Read before accessing data.
 			while (rdr.Read())
 			{
 				var val = new EnumPocoProp();
@@ -80,8 +76,7 @@ public class MsSqlDbOps(string connString) : IDbOps
 		return vals;
 	}
 
-
-	private const string COLUMN_SQL = @"
+	private const string COLUMN_SQL = """
 			SELECT
 				object_name(c.object_id) as EntityName,
 
@@ -147,6 +142,7 @@ public class MsSqlDbOps(string connString) : IDbOps
 			ORDER BY
 				EntityType,
 				EntityName,
-				ColumnSeq;";
+				ColumnSeq;
+			""";
 
 }

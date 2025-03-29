@@ -16,26 +16,22 @@ public class BuildSettings
 	public List<string> ValidateSettings()
 	{
 		List<string> errors = new();
+
 		if (!argsDict.ContainsKey("applicationName"))
-		{
 			errors.Add("applicationName is required.");
-		}
+		
 		if (!argsDict.ContainsKey("basePath"))
-		{
 			errors.Add("basePath is required.");
-		}
+		
 		if (!argsDict.ContainsKey("dbName"))
-		{
 			errors.Add("dbName is required.");
-		}
+		
 		if (!argsDict.ContainsKey("dbType"))
-		{
 			errors.Add("dbType is required.");
-		}
+		
 		if (!argsDict.ContainsKey("dbConnStr"))
-		{
 			errors.Add("dbConnStr is required.");
-		}
+		
 		return errors;
 	}
 
@@ -56,10 +52,9 @@ public class BuildSettings
 		bool includeTsModelAttribute = argsDict.GetValueOrDefault("includeTsModelAttribute", "true").Equals("true", StringComparison.CurrentCultureIgnoreCase);
 
 		string[] ignoreTables = [];
+
 		if (argsDict.TryGetValue("ignoreTableNames", out string? value))
-		{
 			ignoreTables = value.Split(',');
-		}
 
 		DbType dbType = Enum.Parse<DbType>(dbTypeStr, ignoreCase: true);
 

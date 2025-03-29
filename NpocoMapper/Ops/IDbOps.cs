@@ -6,5 +6,5 @@ namespace NpocoMapper.Ops;
 public interface IDbOps
 {
 	List<Column> LoadColumns();
-	List<EnumPocoProp> LoadEnumValus(EnumPoco enumPoco);
+	List<EnumPocoProp> LoadEnumValues(EnumPoco enumPoco);
 }

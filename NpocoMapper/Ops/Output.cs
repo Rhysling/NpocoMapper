@@ -1,9 +1,6 @@
 ﻿using NpocoMapper.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NpocoMapper.Ops;
 
@@ -25,7 +22,7 @@ public static class Output
 			epl.AddRange(settings.ForceEnumList);
 
 			foreach (var e in epl)
-				e.Values = settings.DbOps.LoadEnumValus(e);
+				e.Values = settings.DbOps.LoadEnumValues(e);
 			foreach (var e in epl)
 				FileOps.SaveFile(settings.ModelPath, EntityType.Enum, e.EnumName, Writer.WriteEnum(e, settings.ModelNamespace), settings.OverwriteEnums);
 		}

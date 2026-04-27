@@ -2,18 +2,16 @@
 
 public class Column
 {
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
-	public string EntityName { get; set; }
-	public string EntityType { get; set; }
+	public required string EntityName { get; set; }
+	public required string EntityType { get; set; }
 	public int ColumnSeq { get; set; }
-	public string ColumnName { get; set; }
-	public string SqlDataType { get; set; }
+	public required string ColumnName { get; set; }
+	public required string SqlDataType { get; set; }
 	public bool IsNullable { get; set; }
 	public int MaxLength { get; set; }
 	public int Precision { get; set; }
 	public bool IsPk { get; set; }
-	public string ConstraintName { get; set; }
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider adding the 'required' modifier or declaring as nullable.
+	public required string ConstraintName { get; set; }
 	public bool IsIdentity { get; set; }
 	public bool IsComputed { get; set; }
 

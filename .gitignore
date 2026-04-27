@@ -39,3 +39,6 @@ node_modules/
 
 # Visual Studio 2015 cache/options directory
 .vs/
+
+# Demo/test project - not part of the repository
+NpocoMapper.Demo/

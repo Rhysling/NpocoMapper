@@ -18,22 +18,22 @@ public class MsSqlDbOps(string connString) : IDbOps
 
 			while (rdr.Read())
 			{
-				Column col = new Column();
+				Column col = new Column {
+				EntityName = rdr["EntityName"].ToString()!,
+				EntityType = rdr["EntityType"].ToString()!,
+				ColumnSeq = int.Parse(rdr["ColumnSeq"].ToString()!),
+				ColumnName = rdr["ColumnName"].ToString()!,
+				SqlDataType = rdr["SqlDataType"].ToString()!,
+				IsNullable = rdr["IsNullable"].ToString() == "True",
+				MaxLength = int.Parse(rdr["MaxLength"].ToString()!),
+				Precision = int.Parse(rdr["Precision"].ToString()!),
+				IsPk = rdr["IsPk"].ToString() == "True",
+				ConstraintName = rdr["ConstraintName"].ToString()!,
+				IsIdentity = rdr["IsIdentity"].ToString() == "True",
+				IsComputed = rdr["IsComputed"].ToString() == "True"
+			};
 
-				col.EntityName = rdr["EntityName"].ToString()!;
-				col.EntityType = rdr["EntityType"].ToString()!;
-				col.ColumnSeq = int.Parse(rdr["ColumnSeq"].ToString()!);
-				col.ColumnName = rdr["ColumnName"].ToString()!;
-				col.SqlDataType = rdr["SqlDataType"].ToString()!;
-				col.IsNullable = rdr["IsNullable"].ToString() == "True";
-				col.MaxLength = int.Parse(rdr["MaxLength"].ToString()!);
-				col.Precision = int.Parse(rdr["Precision"].ToString()!);
-				col.IsPk = rdr["IsPk"].ToString() == "True";
-				col.ConstraintName = rdr["ConstraintName"].ToString()!;
-				col.IsIdentity = rdr["IsIdentity"].ToString() == "True";
-				col.IsComputed = rdr["IsComputed"].ToString() == "True";
-
-				cols.Add(col);
+			cols.Add(col);
 			}
 		}
 
@@ -63,11 +63,11 @@ public class MsSqlDbOps(string connString) : IDbOps
 
 			while (rdr.Read())
 			{
-				var val = new EnumPocoProp();
-
-				val.Id = int.Parse(rdr[enumPoco.IdColumnName].ToString()!);
-				val.Name = UtilNameTransform.CleanName(rdr[enumPoco.NameColumnName].ToString()!);
-				val.Description = rdr[enumPoco.DescriptionColumnName].ToString()!;
+				var val = new EnumPocoProp {
+					Id = int.Parse(rdr[enumPoco.IdColumnName].ToString()!),
+					Name = UtilNameTransform.CleanName(rdr[enumPoco.NameColumnName].ToString()!),
+					Description = rdr[enumPoco.DescriptionColumnName].ToString()!
+				};
 
 				vals.Add(val);
 			}

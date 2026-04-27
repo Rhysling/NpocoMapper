@@ -114,11 +114,11 @@ public class SqliteDbOps(string connString) : IDbOps
 		{
 			while (rdr.Read())
 			{
-				var val = new EnumPocoProp();
-
-				val.Id = rdr.GetInt32(0);
-				val.Name = UtilNameTransform.CleanName(rdr.GetString(1));
-				val.Description = rdr.IsDBNull(2) ? rdr.GetString(2) : "";
+				var val = new EnumPocoProp {
+					Id = rdr.GetInt32(0),
+					Name = UtilNameTransform.CleanName(rdr.GetString(1)),
+					Description = rdr.IsDBNull(2) ? rdr.GetString(2) : ""
+				};
 
 				vals.Add(val);
 			}

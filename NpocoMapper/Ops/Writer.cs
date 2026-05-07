@@ -86,6 +86,37 @@ namespace {namespaceName}
 			""";
 	}
 
+	public static string WriteNameValueItem(string modelNamespace)
+	{
+		return $$"""
+			namespace {{modelNamespace}};
+
+			[TypeScriptModel]
+			public class NameValueItem
+			{
+				public string Name { get; set; } = "";
+				public string Value { get; set; } = "";
+			}
+			""";
+	}
+
+	public static string WriteTypeScriptModelAttribute(string modelNamespace)
+	{
+		return $$"""
+			using System;
+
+			namespace {{modelNamespace}};
+
+			[AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
+			public class TypeScriptModelAttribute : Attribute
+			{
+				public string ExcludeMembersByName { get; set; } = "";
+				public string OptionalMembersByName { get; set; } = "";
+				public bool IsInterface { get; set; } = false;
+			}
+			""";
+	}
+
 	public static string WriteRepo(Poco poco, string modelNamespace, string repoNamespace)
 	{
 		bool hasIsDeleted = poco.Props.Any(a => a.PropName == "IsDeleted");

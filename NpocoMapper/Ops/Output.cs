@@ -30,6 +30,12 @@ public static class Output
 		// Pocos
 		if (settings.GeneratePocos)
 		{
+			//Generate Models/Core/NameValueItem.cs
+			FileOps.SaveFile(settings.ModelPath, EntityType.PocoBase, "NameValueItem", Writer.WriteNameValueItem(settings.ModelNamespace), false);
+
+			//Generate Models/Core/TypeScriptModelAttribute.cs
+			FileOps.SaveFile(settings.ModelPath, EntityType.PocoBase, "TypeScriptModelAttribute", Writer.WriteTypeScriptModelAttribute(settings.ModelNamespace), false);
+
 			foreach (var p in pocos.Where(a => a.ClassType != "Enum"))
 			{
 				var et = p.ClassType == "Rw" ? EntityType.PocoRw : EntityType.PocoRo;

@@ -5,12 +5,30 @@ using System.Collections.Generic;
 namespace NpocoMapper.Ops;
 public class BuildSettings
 {
-	private Dictionary<string, string> argsDict;
+	private Dictionary<string, string> argsDict = [];
 
-	public BuildSettings(string[] args)
+	public void LoadFromArgs(string[]? args)
 	{
-		argsDict = new();
-		ParseArgs(args);
+		if (args == null) return;
+
+		foreach (string arg in args)
+		{
+			(string key, string value) = SplitOnFirstOccurrence(arg, '=');
+			argsDict[key] = value;
+		}
+	}
+
+	public void LoadFromFile(string? tabDelimArgs)
+	{
+		if (String.IsNullOrWhiteSpace(tabDelimArgs)) return;
+
+		string[] lines = tabDelimArgs.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+
+		foreach (string line in lines)
+		{
+			var kvp = line.Split('\t');
+			if (kvp.Length > 1) argsDict[kvp[0]] = kvp[1];
+		}
 	}
 
 	public List<string> ValidateSettings()
@@ -90,18 +108,14 @@ public class BuildSettings
 			includeTsModelAttribute=true|false (not used)
 
 			ignoreTableNames=table1,table2,table3 (default empty)
-		
+
+		Arguments can be supplied inline or in a tab delimited "settings.txt" file:
+		<name1><tab><value1>
+		<name2><tab><value2>
+		...
 		""";
 
-
-	private void ParseArgs(string[] args)
-	{
-		foreach (string arg in args)
-		{
-			(string key, string value) = SplitOnFirstOccurrence(arg, '=');
-			argsDict[key] = value;
-		}
-	}
+	private static readonly string[] separator = new[] { "\r\n", "\n" };
 
 	private static (string, string) SplitOnFirstOccurrence(string input, char delimiter)
 	{
@@ -114,5 +128,4 @@ public class BuildSettings
 		string secondPart = input.Substring(index + 1);
 		return (firstPart, secondPart);
 	}
-
 }

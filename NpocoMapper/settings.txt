@@ -1,0 +1,7 @@
+applicationName	NpocoMapper.Demo
+basePath	D:\aa-dev\AppDev\NpocoMapper\NpocoMapper.Demo
+dbName	TestingPocos
+dbType	MsSql
+dbConnStr	Data Source=localhost;Initial Catalog=TestingPocos;Integrated Security=True;TrustServerCertificate=True
+overwritePocos	true
+overwriteRepos	true

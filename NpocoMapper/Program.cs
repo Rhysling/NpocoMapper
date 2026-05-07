@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using NpocoMapper.Models;
 using NpocoMapper.Ops;
 
@@ -8,15 +9,15 @@ class Program
 {
 	static void Main(string[] args)
 	{
-		//var settings = SettingsFromArgs(args);
-		var settings = SettingsFromPresetMsSql();
+		var settings = SettingsFromFileArgs(args);
+		//var settings = SettingsFromPresetMsSql();
 		//var settings = SettingsFromPresetSqlite();
 
 		//settings.OverwritePocos = true;
 		//settings.OverwriteRepos = true;
 		//settings.IgnoreTableNames = ["TestTableIgnored"];
 
-		if (settings == null) return;
+		if (settings is null) return;
 
 		var runner = new Runner(settings);
 		runner.Run();
@@ -25,10 +26,18 @@ class Program
 		Console.ReadKey();
 	}
 
-	private static Settings? SettingsFromArgs(string[] args)
+	private static Settings? SettingsFromFileArgs(string[] args)
 	{
-		// Settings -- From Args ********************************
-		var bs = new BuildSettings(args);
+		// Settings -- From File/Args ********************************
+		string settingsFile = Path.Combine(AppContext.BaseDirectory, "settings.txt");
+		string settingsFileArgs = "";
+
+		if (File.Exists(settingsFile)) 
+			settingsFileArgs = File.ReadAllText(settingsFile);
+		
+		var bs = new BuildSettings();
+		bs.LoadFromFile(settingsFileArgs);
+		bs.LoadFromArgs(args);
 		var errors = bs.ValidateSettings();
 
 		if (errors.Count > 0)

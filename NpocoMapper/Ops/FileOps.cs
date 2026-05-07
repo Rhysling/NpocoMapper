@@ -15,6 +15,7 @@ namespace NpocoMapper.Ops
 				EntityType.Enum => Path.Combine(path + @"\Enums"),
 				EntityType.PocoRw => Path.Combine(path + @"\PocosRw"),
 				EntityType.PocoRo => Path.Combine(path + @"\PocosRo"),
+				EntityType.PocoBase => Path.Combine(path + @"\Core"),
 				EntityType.ITypeScript => path,
 				EntityType.RepoRw => Path.Combine(path + @"\Rw"),
 				EntityType.RepoRo => Path.Combine(path + @"\Ro"),
@@ -36,6 +37,5 @@ namespace NpocoMapper.Ops
 				File.WriteAllText(fullPath, FileText);
 
 		}
-
 	}
 }

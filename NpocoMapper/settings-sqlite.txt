@@ -1,0 +1,8 @@
+
+applicationName	NpocoMapper.Demo
+basePath	D:\UserData\Documents\AppDev\NpocoMapper\NpocoMapper.Demo
+dbName	TestingPocos
+dbType	Sqlite
+dbConnStr	Data Source=D:\UserData\Documents\AppDev\NpocoMapper\NpocoMapper.Demo\db\TestGen.sqlite;
+overwritePocos	true
+overwriteRepos	true

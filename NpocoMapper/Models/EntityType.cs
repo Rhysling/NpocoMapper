@@ -2,11 +2,12 @@
 
 public enum EntityType
 {
-	Enum = 0,
-	PocoRw = 1,
-	PocoRo = 2,
-	RepoRw = 3,
-	RepoRo = 4,
-	RepoBase = 5,
-	ITypeScript = 6
+	Enum,
+	PocoRw,
+	PocoRo,
+	PocoBase,
+	RepoRw,
+	RepoRo,
+	RepoBase,
+	ITypeScript
 }

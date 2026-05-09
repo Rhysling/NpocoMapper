@@ -1,6 +1,7 @@
 ﻿using NpocoMapper.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NpocoMapper.Ops;
 public class BuildSettings
@@ -22,7 +23,7 @@ public class BuildSettings
 	{
 		if (String.IsNullOrWhiteSpace(tabDelimArgs)) return;
 
-		string[] lines = tabDelimArgs.Split(separator, StringSplitOptions.RemoveEmptyEntries);
+		string[] lines = [.. tabDelimArgs.Split(separator, StringSplitOptions.RemoveEmptyEntries).Where(a => !a.StartsWith("//") && !String.IsNullOrWhiteSpace(a))];
 
 		foreach (string line in lines)
 		{
@@ -115,7 +116,7 @@ public class BuildSettings
 		...
 		""";
 
-	private static readonly string[] separator = new[] { "\r\n", "\n" };
+	private static readonly string[] separator = ["\r\n", "\n"];
 
 	private static (string, string) SplitOnFirstOccurrence(string input, char delimiter)
 	{
